@@ -10,5 +10,12 @@
       "indentWidth": 2,
       "semicolons": "asNeeded"
     }
+  },
+  "linter": {
+    "rules": {
+      "suspicious": {
+        "noConsole": "off"
+      }
+    }
   }
 }

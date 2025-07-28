@@ -9,11 +9,11 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './pages/__root'
-import { Route as IndexRouteImport } from './pages/index'
+import { Route as CreateRoomIndexRouteImport } from './pages/_create-room/index'
 import { Route as RoomIdRouteImport } from './pages/room/$id'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
+const CreateRoomIndexRoute = CreateRoomIndexRouteImport.update({
+  id: '/_create-room/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
@@ -24,38 +24,38 @@ const RoomIdRoute = RoomIdRouteImport.update({
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
   '/room/$id': typeof RoomIdRoute
+  '/': typeof CreateRoomIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
   '/room/$id': typeof RoomIdRoute
+  '/': typeof CreateRoomIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
   '/room/$id': typeof RoomIdRoute
+  '/_create-room/': typeof CreateRoomIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/room/$id'
+  fullPaths: '/room/$id' | '/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/room/$id'
-  id: '__root__' | '/' | '/room/$id'
+  to: '/room/$id' | '/'
+  id: '__root__' | '/room/$id' | '/_create-room/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
   RoomIdRoute: typeof RoomIdRoute
+  CreateRoomIndexRoute: typeof CreateRoomIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
+    '/_create-room/': {
+      id: '/_create-room/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+      preLoaderRoute: typeof CreateRoomIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/room/$id': {
@@ -69,8 +69,8 @@ declare module '@tanstack/react-router' {
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
   RoomIdRoute: RoomIdRoute,
+  CreateRoomIndexRoute: CreateRoomIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
