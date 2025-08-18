@@ -1,135 +1,91 @@
-# NLW Agents - Web
+# NLW Agents Web
 
-Aplicação web desenvolvida com React e TanStack Router para o projeto NLW Agents.
+Interface web moderna para o NLW Agents, desenvolvida com React 19, TypeScript e TanStack Router. A aplicação permite criar salas virtuais para **ensino e lives educativas**, fazer upload de áudio e interagir com agentes de IA através de perguntas e respostas.
 
-## 🚀 Tecnologias
+## 🛠️ Tecnologias
 
-### Core
-
-- **React 19** - Biblioteca para construção de interfaces
-- **TypeScript** - Tipagem estática para JavaScript
-- **Vite** - Build tool e dev server
-
-### Roteamento
-
-- **TanStack Router** - Roteamento type-safe com file-based routing
-- **TanStack React Query** - Gerenciamento de estado e cache de dados
-
-### Estilização
-
-- **Tailwind CSS v4** - Framework CSS utility-first
-- **Shadcn UI** - Componentes pré-estilizados
-- **Class Variance Authority** - Sistema de variantes para componentes
-
-### Desenvolvimento
-
-- **Biome** - Linter e formatter (configurado com ultracite)
-- **TanStack Router DevTools** - Ferramentas de desenvolvimento
+- **Framework**: React 19 com TypeScript
+- **Roteamento**: TanStack Router para navegação type-safe
+- **Estilização**: Tailwind CSS com componentes shadcn/ui
+- **Formulários**: React Hook Form com validação Zod
+- **Requisições**: TanStack Query para gerenciamento de dados
+- **Linting**: Biome + Ultracite
 
 ## 📁 Estrutura do Projeto
 
 ```
 src/
-├── components/          # Componentes reutilizáveis
-│   └── ui/             # Componentes base (shadcn/ui)
-├── lib/                # Utilitários e configurações
-├── pages/              # Rotas da aplicação (file-based routing)
-│   ├── __root.tsx      # Rota raiz
-│   ├── index.tsx       # Página inicial
-│   └── room/           # Rotas de sala
-│       └── $id.tsx     # Rota dinâmica para sala específica
-├── main.tsx            # Ponto de entrada da aplicação
-└── route-tree.gen.ts   # Árvore de rotas gerada automaticamente
+├── components/           # Componentes reutilizáveis
+│   ├── ui/              # Componentes base (shadcn/ui)
+│   ├── create-room-form.tsx    # Formulário de criação de sala
+│   ├── question-form.tsx       # Formulário de perguntas
+│   ├── question-item.tsx       # Item individual de pergunta
+│   ├── question-list.tsx       # Lista de perguntas
+│   └── room-list.tsx           # Lista de salas
+├── http/                # Camada de comunicação com API
+│   ├── api.ts           # Configuração base da API
+│   ├── types/           # Tipos TypeScript
+│   └── use-*.ts         # Hooks customizados para API
+├── lib/                 # Utilitários e configurações
+├── pages/               # Páginas da aplicação
+│   ├── __root.tsx       # Layout raiz
+│   ├── _create-room/    # Página de criação de sala
+│   └── room/$id/        # Páginas de sala específica
+└── main.tsx             # Ponto de entrada da aplicação
 ```
 
-## ⚙️ Configurações
-
-- **File-based routing** habilitado
-- **Auto code splitting** ativo para otimização de performance
-- **Route tree** gerada automaticamente via Vite plugin
-- **Path mapping** configurado (`@/*` → `./src/*`)
-
-## 🛠️ Setup e Instalação
+## 🚀 Como Executar
 
 ### Pré-requisitos
 
 - Node.js 18+
-- npm, yarn, pnpm ou bun
+- Backend rodando (ver [README do servidor](../server/README.md))
 
 ### Instalação
 
-1. **Clone o repositório**
-
-```bash
-git clone <repository-url>
-cd web
-```
-
-2. **Instale as dependências**
+1. **Instale as dependências**
 
 ```bash
 npm install
-# ou
-yarn install
-# ou
-pnpm install
-# ou
-bun install
 ```
 
-3. **Execute o projeto em desenvolvimento**
+2. **Configure as variáveis de ambiente**
+
+```bash
+# O frontend se conecta ao backend na porta 3333 por padrão
+# Certifique-se de que o backend está rodando
+```
+
+3. **Execute em desenvolvimento**
 
 ```bash
 npm run dev
-# ou
-yarn dev
-# ou
-pnpm dev
-# ou
-bun dev
 ```
 
-### Scripts Disponíveis
-
-- `npm run dev` - Inicia o servidor de desenvolvimento
-- `npm run build` - Gera build de produção
-- `npm run preview` - Preview do build de produção
-- `npm run lint` - Executa o linter
-
-## 🔧 Configurações Importantes
-
-### Vite
-
-O projeto utiliza o plugin do TanStack Router para Vite com:
-
-- **Auto code splitting** habilitado
-- **Route tree** gerada em `src/route-tree.gen.ts`
-- **Alias** configurado para `@/*` apontando para `./src/*`
-
-### TanStack Router
-
-- **File-based routing** com diretório `src/pages/`
-- **Route token**: `layout`
-- **Code splitting automático** para otimização
-
-### Tailwind CSS
-
-- **Versão 4** com plugin Vite
-- Configuração integrada com componentes UI
-
-## 🚀 Deploy
-
-O projeto está configurado para deploy em qualquer plataforma que suporte aplicações Vite/React:
+4. **Build para produção**
 
 ```bash
 npm run build
+npm run preview
 ```
 
-O build será gerado na pasta `dist/` e pode ser servido por qualquer servidor estático.
+## 🎯 Rotas da Aplicação
 
-## 📚 Documentação Adicional
+### `/` - Página Inicial
 
-- [TanStack Router](https://tanstack.com/router)
-- [TanStack Query](https://tanstack.com/query)
-- [Tailwind CSS](https://tailwindcss.com)
-- [Radix UI](https://www.radix-ui.com)
+- Formulário para criar nova sala
+- Lista de todas as salas existentes
+- Contador de perguntas por sala
+
+### `/room/:id` - Sala Específica
+
+- Visualização da sala selecionada
+- Lista de perguntas e respostas
+- Formulário para fazer novas perguntas
+- Histórico de conversas
+
+### `/room/:id/audio` - Upload de Áudio
+
+- Interface para gravar áudio
+- Upload de arquivos de áudio
+- Transcrição automática via IA
