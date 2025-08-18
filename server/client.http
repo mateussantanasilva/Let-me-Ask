@@ -33,10 +33,10 @@ GET {{baseUrl}}/rooms/{{roomId}}/questions
 ###
 
 # @name createQuestion
-POST {{baseUrl}}/rooms/{{roomId}}/questions
+POST {{baseUrl}}/rooms/f6a15802-9e53-4c40-b916-f77a5aa17e7d/questions
 Accept: application/json
 Content-Type: application/json
 
 {
-  "question": "O que é NestJS?"
+  "question": "O que é NestJS e a sua diferença com o Express?"
 }
